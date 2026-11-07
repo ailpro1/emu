@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PocketEmu">
+<meta name="theme-color" content="#11131a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="stylesheet" href="css/app.css">
+<title>PocketEmu</title>
+</head>
+<body>
+<header class="top">
+  <h1>PocketEmu</h1>
+  <button id="btnSettings" class="icon" aria-label="Settings">⚙︎</button>
+</header>
+
+<main>
+  <div id="installHint" class="card hint" hidden>
+    <b>Install:</b> tap <span class="kbd">Share</span> → <span class="kbd">Add to Home Screen</span>.
+    Opens full screen, keeps ROMs + saves on this iPhone.
+  </div>
+
+  <label class="addbtn">
+    + Add ROM
+    <input id="romInput" type="file" multiple hidden>
+  </label>
+  <p class="muted small">GBA · GB/GBC · NDS · PS1 · PSP (experimental). ROM stays on this device only.</p>
+
+  <div id="library" class="grid"></div>
+  <p id="empty" class="muted center">No games yet. Tap <b>+ Add ROM</b> and pick a file from the Files app.</p>
+</main>
+
+<!-- System picker -->
+<dialog id="dlgSystem">
+  <form method="dialog">
+    <h3>Which system?</h3>
+    <p id="dlgSystemFile" class="muted small"></p>
+    <div id="dlgSystemChoices" class="choices"></div>
+    <button value="cancel" class="ghost">Cancel</button>
+  </form>
+</dialog>
+
+<!-- Game options -->
+<dialog id="dlgGame">
+  <form method="dialog">
+    <h3 id="gTitle"></h3>
+    <p id="gInfo" class="muted small"></p>
+    <label id="gCoreRow">Core
+      <select id="gCore"></select>
+    </label>
+    <div class="row wrap">
+      <button type="button" id="gPlay" class="primary">▶ Play</button>
+      <button type="button" id="gFresh">Play (ignore auto-save)</button>
+    </div>
+    <h4>Saves</h4>
+    <div id="gSaves" class="small"></div>
+    <div class="row wrap">
+      <button type="button" id="gExport">Export saves</button>
+      <label class="btn">Import save<input id="gImport" type="file" hidden></label>
+    </div>
+    <div class="row wrap">
+      <button type="button" id="gRename">Rename</button>
+      <button type="button" id="gDelete" class="danger">Delete game</button>
+    </div>
+    <button value="close" class="ghost">Close</button>
+  </form>
+</dialog>
+
+<!-- Settings -->
+<dialog id="dlgSettings">
+  <form method="dialog">
+    <h3>Settings</h3>
+    <label>Auto-save every
+      <select id="sAutoInt">
+        <option value="0">Off (manual only)</option>
+        <option value="30">30 s</option>
+        <option value="60">1 min</option>
+        <option value="120">2 min</option>
+        <option value="300">5 min</option>
+      </select>
+    </label>
+    <label class="check"><input type="checkbox" id="sAutoExit"> Auto-save when leaving / app goes to background</label>
+    <label class="check"><input type="checkbox" id="sResume"> Resume from auto-save on start</label>
+    <label class="check"><input type="checkbox" id="sTouch"> NDS: drag on bottom screen = stylus</label>
+
+    <h4>BIOS (optional)</h4>
+    <div id="biosList" class="small"></div>
+
+    <h4>Mirror to TV</h4>
+    <p class="small">
+      <b>AirPlay (Apple TV / AirPlay TV):</b> Control Centre → <span class="kbd">Screen Mirroring</span> → pick TV.
+      In game tap <span class="kbd">TV</span> for a clean full-screen picture (controls stay on phone).<br>
+      <b>Cable:</b> Lightning Digital AV Adapter → HDMI. Mirrors automatically.<br>
+      <b>Controller:</b> pair a PS / Xbox / MFi pad in iOS Bluetooth — works in game.
+    </p>
+
+    <h4>Storage</h4>
+    <p id="storageInfo" class="small muted"></p>
+    <div class="row wrap">
+      <button type="button" id="sBackup">Backup all saves</button>
+      <label class="btn">Restore backup<input id="sRestore" type="file" accept=".json,application/json" hidden></label>
+    </div>
+    <button value="close" class="ghost">Close</button>
+  </form>
+</dialog>
+
+<div id="toast" class="toast" hidden></div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

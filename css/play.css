@@ -1,0 +1,25 @@
+html, body { margin: 0; height: 100%; background: #000; color: #eee; overflow: hidden;
+  font: 15px -apple-system, BlinkMacSystemFont, sans-serif; overscroll-behavior: none; touch-action: none;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+#wrap { position: fixed; inset: 0; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+#game { width: 100%; height: 100%; }
+#bar { position: fixed; top: calc(6px + env(safe-area-inset-top)); left: calc(6px + env(safe-area-inset-left));
+  display: flex; gap: 6px; z-index: 1000; opacity: .75; }
+#bar button, #bShow { background: #000a; color: #fff; border: 1px solid #fff3; border-radius: 10px;
+  font-size: 18px; width: 40px; height: 36px; padding: 0; }
+#bShow { position: fixed; top: calc(6px + env(safe-area-inset-top)); left: calc(6px + env(safe-area-inset-left)); z-index: 1000; width: 24px; opacity: .5; }
+/* TV / controller mode: clean picture for AirPlay mirroring, on-screen pad hidden */
+body.tv #bar { opacity: .15; }
+body.tv .ejs_virtualGamepad_parent, body.tv .ejs_menu_bar { display: none !important; }
+dialog { background: #1b1e28; color: #eee; border: 1px solid #2a2f3d; border-radius: 16px; width: min(90vw, 380px); padding: 16px; }
+dialog::backdrop { background: #0009; }
+dialog h3 { margin: 0 0 10px; }
+.slot { display: flex; gap: 10px; align-items: center; width: 100%; text-align: left; background: #2a2f3d; color: #eee;
+  border: 0; border-radius: 10px; padding: 8px; margin-bottom: 8px; font: inherit; }
+.slot img, .slot .noimg { width: 64px; height: 48px; object-fit: contain; background: #000; border-radius: 6px; flex: none; }
+.slot small { color: #9aa1b2; display: block; }
+.ghost { background: transparent; color: #9aa1b2; border: 0; width: 100%; padding: 10px; font: inherit; }
+.toast { position: fixed; left: 50%; top: calc(50px + env(safe-area-inset-top)); transform: translateX(-50%);
+  background: #000c; color: #fff; padding: 8px 14px; border-radius: 18px; z-index: 2000; font-size: 14px; }
+.err { padding: 24px; text-align: center; }
+.err a { color: #e53935; }
